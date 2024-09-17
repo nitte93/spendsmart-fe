@@ -7,8 +7,10 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 import { NavLink } from "@/components/common";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
@@ -21,6 +23,7 @@ export default function Navbar() {
       .unwrap()
       .then(() => {
         dispatch(setLogout());
+        router.push("/");
       });
   };
 
@@ -33,8 +36,16 @@ export default function Navbar() {
         isMobile={isMobile}
         href="/dashboard"
       >
-        Dashboard
+        Kharcha.ai
       </NavLink>
+      <NavLink
+        isSelected={isSelected("/documents")}
+        isMobile={isMobile}
+        href="/documents"
+      >
+        Documents
+      </NavLink>
+
       <NavLink isMobile={isMobile} onClick={handleLogout}>
         Logout
       </NavLink>
@@ -61,7 +72,7 @@ export default function Navbar() {
   );
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 fixed top-0 left-0 right-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -79,7 +90,7 @@ export default function Navbar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink href="/" isBanner>
-                    Full Auth
+                    Kharcha.ai
                   </NavLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">

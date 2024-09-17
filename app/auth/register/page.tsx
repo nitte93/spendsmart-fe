@@ -18,12 +18,19 @@ export default function Page() {
           alt="Full Auth"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign up for your account
+          Create your account
         </h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <RegisterForm />
+        <div className="relative flex py-5 items-center">
+          <div className="flex-grow border-t border-gray-400"></div>
+          <span className="flex-shrink mx-4 text-gray-400">
+            Or continue with
+          </span>
+          <div className="flex-grow border-t border-gray-400"></div>
+        </div>
         <SocialButtons />
 
         <p className="mt-10 text-center text-sm text-gray-500">

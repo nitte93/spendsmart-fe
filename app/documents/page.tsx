@@ -1,13 +1,8 @@
 "use-client";
-import Documents from "../../components/Documents";
+import Documents from "@/components/Documents";
 
 const DocumentsPage = () => {
-  return (
-    <div>
-      <h1>Documents</h1>
-      <Documents />
-    </div>
-  );
+  return <Documents />;
 };
 
 export default DocumentsPage;

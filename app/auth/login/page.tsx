@@ -24,8 +24,14 @@ export default function Page() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <LoginForm />
+        <div className="relative flex py-5 items-center">
+          <div className="flex-grow border-t border-gray-400"></div>
+          <span className="flex-shrink mx-4 text-gray-400">
+            Or continue with
+          </span>
+          <div className="flex-grow border-t border-gray-400"></div>
+        </div>
         <SocialButtons />
-
         <p className="mt-10 text-center text-sm text-gray-500">
           Don&apos;t have an account?{" "}
           <Link

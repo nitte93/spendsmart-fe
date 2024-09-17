@@ -3,8 +3,10 @@
 import { useState } from "react";
 import axios from "axios";
 import useSWR, { mutate } from "swr";
+import QueryResult from "./QueryResult";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+const fetcher = (url) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 const Chat = ({ documentId }) => {
   const {
@@ -12,8 +14,12 @@ const Chat = ({ documentId }) => {
     error,
     mutate,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/chat/${documentId}`,
-    fetcher
+    `${process.env.NEXT_PUBLIC_HOST}/uploads/chat/${documentId}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
   const [newMessage, setNewMessage] = useState("");
 
@@ -33,8 +39,9 @@ const Chat = ({ documentId }) => {
     }, false);
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_URL}/uploads/chatwithrag/${documentId}`,
-        payload
+        `${process.env.NEXT_PUBLIC_HOST}/uploads/chatwithrag/${documentId}`,
+        payload,
+        { withCredentials: true }
       );
       console.log({ data: response.data });
       // Update the local state with both the user's message and the new response from the server
@@ -51,9 +58,9 @@ const Chat = ({ documentId }) => {
   if (!messages) return <div>Loading...</div>;
   console.log({ messages });
   return (
-    <div className="max-w-lg mx-auto my-4">
-      <div className="mb-2 bg-white shadow rounded-lg p-4">
-        <div className="overflow-y-auto h-96 mb-4 space-y-2">
+    <div className="flex flex-col h-[calc(100vh-20rem)]">
+      <div className="flex-grow overflow-hidden">
+        <div className="h-full overflow-y-auto p-4 space-y-2">
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -69,18 +76,20 @@ const Chat = ({ documentId }) => {
                 }`}
                 style={{ maxWidth: "80%" }}
               >
-                <p className="text-sm">{msg.message}</p>
+                <p className="text-sm">{msg.message && <QueryResult response={msg} />}</p>
               </div>
             </div>
           ))}
         </div>
+      </div>
+      <div className="p-4">
         <form onSubmit={sendMessage} className="flex items-center">
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 border border-gray-300 p-2 rounded-lg mr-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-grow border border-gray-300 p-2 rounded-lg mr-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <button
             type="submit"

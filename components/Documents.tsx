@@ -5,11 +5,12 @@ import useSWR from "swr";
 import axios from "axios";
 import Link from "next/link";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+const fetcher = (url) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 function Documents() {
   const { data: documents, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/documents`,
+    `${process.env.NEXT_PUBLIC_HOST}/uploads/documents`,
     fetcher
   );
 
@@ -19,7 +20,7 @@ function Documents() {
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        List of Documents
+        Your uploaded documents:
       </h1>
       <div className="space-y-4">
         {documents.map((document) => (
@@ -34,7 +35,7 @@ function Documents() {
             >
               Download
             </a>
-            <Link href={`/documents/${document.id}`} legacyBehavior>
+            <Link href={`/documents/${document.file_name.split(".")[0]}`} legacyBehavior>
               <a className="ml-4 text-green-500 hover:text-green-700 transition duration-300 ease-in-out">
                 Show Document
               </a>
@@ -47,4 +48,3 @@ function Documents() {
 }
 
 export default Documents;
-export const config = { runtime: "client" }; // This marks MyComponent as a Client Component

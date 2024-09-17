@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.transcript p {
+  margin-bottom: 10px;
+}
+
+.transcript p.active {
+  background-color: yellow;
+}
+
+.transcript {
+    max-height: 200px;
+    overflow-y: auto;
+    line-height: 1.5;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  
+  .word {
+    transition: background-color 0.3s ease;
+  }
+  
+  .word.highlight {
+    background-color: yellow;
+  }
+
+  .highlight {
+    background-color: yellow;
+    border-radius: 5px;
+    border: 1px solid green;
+  }
