@@ -28,7 +28,15 @@ const VideoSummary = ({ videoUrl, summary, transcriptSegments }) => {
       return () => clearInterval(intervalId);
     }
   }, [player]);
-
+  const handlePlayPause = (play: boolean) => {
+    if (player) {
+      if (play) {
+        player.play();
+      } else {
+        player.pause();
+      }
+    }
+  };
   return (
     <div>
       <ReactPlayer

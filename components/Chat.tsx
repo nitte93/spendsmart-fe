@@ -44,8 +44,9 @@ const Chat = ({ documentId }) => {
         { withCredentials: true }
       );
       console.log({ data: response.data });
+      const { data } = response.data
       // Update the local state with both the user's message and the new response from the server
-      const updatedMessages = [...messages, payload, { ...response.data }];
+      const updatedMessages = [...messages, payload, { ...data }];
       console.log({ updatedMessages });
       mutate(updatedMessages, false); // Optimistically update without revalidation
       setNewMessage(""); // Clear the input field after sending
@@ -74,7 +75,7 @@ const Chat = ({ documentId }) => {
                     ? "bg-blue-100 border-blue-500 text-blue-700"
                     : "bg-gray-100 border-gray-500 text-gray-700"
                 }`}
-                style={{ maxWidth: "80%" }}
+                style={{ maxWidth: "100%" }}
               >
                 <p className="text-sm">{msg.message && <QueryResult response={msg} />}</p>
               </div>
