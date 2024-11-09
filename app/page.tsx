@@ -16,7 +16,7 @@ export default function Page() {
               Kharcha.ai
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Analyse you Spendings.
+              Analyse Your Spendings.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link

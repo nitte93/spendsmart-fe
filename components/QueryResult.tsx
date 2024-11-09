@@ -42,8 +42,8 @@ const QueryResult: React.FC<QueryResultProps> = ({ response }) => {
   
       return (
         <>
-        <p>{message}</p>
-        <ResponsiveContainer width="100%" height={300}>
+        <p className='py-2'>{message}</p>
+        <ResponsiveContainer width="100%" height={300} className="mt-2">
           <BarChart data={chartData}           
           width={500}
           height={300}
@@ -73,8 +73,8 @@ const QueryResult: React.FC<QueryResultProps> = ({ response }) => {
   
       return (
         <>
-        <p>{message}</p>
-        <ResponsiveContainer width="100%" height={300}>
+        <p className='py-2'>{message}</p>
+        <ResponsiveContainer width="100%" height={300} className="mt-2">
           <LineChart 
           data={chartData} 
           width={500}
@@ -105,8 +105,8 @@ const QueryResult: React.FC<QueryResultProps> = ({ response }) => {
   
       return (
         <>
-        <p>{message}</p>
-        <ResponsiveContainer width="100%" height={300}>
+        <p className='py-2'>{message}</p>
+        <ResponsiveContainer width="100%" height={300} className='mt-2'>
           <BarChart data={chartData} layout="vertical" // Set layout to vertical
           width={500}
           height={300}
@@ -128,14 +128,12 @@ const QueryResult: React.FC<QueryResultProps> = ({ response }) => {
         </>
       );
     } else if (chart_type === 'pie') { // Handle pie chart
-      console.log("sandas",chart_data, formated_data_for_visualization)
       const pieCharts = formated_data_for_visualization.data; // Access multiple pie charts
-      console.log({pieCharts})
       return (
         <>
-        <p>{message}</p>
+          <p className='py-2'>{message}</p>
           {Object.entries(pieCharts).map(([chartKey, chartData]) => (
-            <div key={chartKey}>
+            <div key={chartKey} className='mt-2'>
               <h3>{chartData.label}</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
@@ -156,7 +154,8 @@ const QueryResult: React.FC<QueryResultProps> = ({ response }) => {
       const tableData = formated_data_for_visualization.data; // Access table data
       return (
         <div className="overflow-auto" style={{ maxHeight: '400px', maxWidth: '600px' }}> {/* Set fixed height and width */}
-          <table className="min-w-full bg-white border border-gray-300">
+         <p className='py-2'>{message}</p>
+          <table className="min-w-full bg-white mt-2 border border-gray-300">
             <thead>
               <tr>
                 {Object.keys(tableData[0]).map((key) => (
