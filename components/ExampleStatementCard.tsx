@@ -16,9 +16,9 @@ function Documents() {
           <h2 className="text-lg mt-2 font-semibold text-blue-600">
             example-hdfc-bank-statement.xlsx
           </h2>
-          <a className="text-green-500 block mt-1 hover:text-green-700 transition duration-300 ease-in-out">
+          <Link href="/documents/sample_document" className="text-green-500 block mt-1 hover:text-green-700 transition duration-300 ease-in-out">
             Analyse Document →
-          </a>
+          </Link>
         </div>
       </div>
     </Card>
