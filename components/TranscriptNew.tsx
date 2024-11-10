@@ -37,7 +37,7 @@ const Transcript: React.FC<TranscriptProps> = ({ words, currentTime }) => {
     <div className="transcript" ref={transcriptRef}>
       {words.map((word) => (
         <span
-        //   key={word.start}
+          key={word.start}
           data-start={word.start.toFixed(3)}
           className="word"
         >

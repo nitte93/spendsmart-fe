@@ -43,7 +43,7 @@ const VideoSummary = ({ videoUrl, summary, transcriptSegments }) => {
         url={videoUrl}
         controls
         onProgress={handleProgress}
-        onReady={handleReady}
+        onReady={(player) => handleReady({target: player})}
       />
       <h2>Summary</h2>
       <p>{summary}</p>
